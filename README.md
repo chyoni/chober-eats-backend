@@ -35,3 +35,7 @@
   npm i @nestjs/graphql graphql-tools graphql apollo-server-express
 
   ```
+
+- #03 Settings for GraphQL 2
+
+  > https://docs.nestjs.com/graphql/quick-start#code-first
