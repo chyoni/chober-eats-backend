@@ -45,3 +45,11 @@
 - #05 How to pass Argument GraphQL
 
 - #06 How to pass Argument GraphQL for ArgsType not InputType
+
+- #07 DTO Validator and Pipe
+
+  ```bash
+  npm i class-validator
+
+  npm i class-transformer
+  ```
