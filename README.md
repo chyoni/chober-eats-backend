@@ -54,6 +54,12 @@
   npm i class-transformer
   ```
 
+---
+
+## DB Settings (PostgreSQL)
+
+---
+
 - #08 TypeORM Settings and .env file Settings
 
   ```bash
@@ -64,4 +70,10 @@
 
   npm install cross-env
 
+  ```
+
+- #09 Validating ConfigService
+
+  ```bash
+  npm i joi
   ```
