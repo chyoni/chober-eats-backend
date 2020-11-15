@@ -53,3 +53,15 @@
 
   npm i class-transformer
   ```
+
+- #08 TypeORM Settings and .env file Settings
+
+  ```bash
+
+  npm install --save @nestjs/typeorm typeorm pg
+
+  npm install --save @nestjs/config
+
+  npm install cross-env
+
+  ```
