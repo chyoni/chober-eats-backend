@@ -77,3 +77,5 @@
   ```bash
   npm i joi
   ```
+
+- #10 Generate Entity with TypeORM and GraphQL
