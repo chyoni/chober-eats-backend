@@ -39,3 +39,5 @@
 - #03 Settings for GraphQL 2
 
   > https://docs.nestjs.com/graphql/quick-start#code-first
+
+- #04 How to ObjectType Settings for GraphQL
