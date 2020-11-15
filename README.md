@@ -41,3 +41,5 @@
   > https://docs.nestjs.com/graphql/quick-start#code-first
 
 - #04 How to ObjectType Settings for GraphQL
+
+- #05 How to pass Argument GraphQL
