@@ -43,3 +43,5 @@
 - #04 How to ObjectType Settings for GraphQL
 
 - #05 How to pass Argument GraphQL
+
+- #06 How to pass Argument GraphQL for ArgsType not InputType
