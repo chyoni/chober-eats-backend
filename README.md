@@ -83,3 +83,7 @@
 - #11 Inject TypeORM Repository, Service, Resolver
 
 - #12 Create record by using TypeORM
+
+- #13 Mapped Type (OmitType)
+
+  > https://docs.nestjs.com/openapi/mapped-types
