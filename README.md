@@ -79,3 +79,5 @@
   ```
 
 - #10 Generate Entity with TypeORM and GraphQL
+
+- #11 Inject TypeORM Repository, Service, Resolver
