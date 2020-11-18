@@ -1,5 +1,11 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { IsBoolean, IsNumber, IsString, Length } from 'class-validator';
+import {
+  IsBoolean,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
@@ -16,8 +22,12 @@ export class Restaurant {
   @Length(5, 10)
   name: string;
 
-  @Field((type) => Boolean, { nullable: true })
-  @Column()
+  //nullable은 말그대로 null이 가능하냐마냐를 묻는거고,
+  //defaultValue는 DTO에 애시당초에 값이 들어감 거기서 변경을 하지 않는이상 이 필드는
+  //DTO에 추가되서 데이터베이스에 들어간다.
+  @Field((type) => Boolean, { nullable: true, defaultValue: true })
+  @Column({ default: true })
+  @IsOptional() //해당 필드는 필수가 아닌 옵션
   @IsBoolean()
   isGood?: boolean;
 

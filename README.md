@@ -87,3 +87,5 @@
 - #13 Mapped Type (OmitType)
 
   > https://docs.nestjs.com/openapi/mapped-types
+
+- #14 GraphQL DefaultValue, TypeORM Default
