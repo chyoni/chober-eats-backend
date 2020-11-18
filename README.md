@@ -89,3 +89,5 @@
   > https://docs.nestjs.com/openapi/mapped-types
 
 - #14 GraphQL DefaultValue, TypeORM Default
+
+- #15 Update Data with GraphQL, TypeORM 1
