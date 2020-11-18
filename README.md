@@ -91,3 +91,5 @@
 - #14 GraphQL DefaultValue, TypeORM Default
 
 - #15 Update Data with GraphQL, TypeORM 1
+
+- #16 Update Data with GraphQL, TypeORM 2
