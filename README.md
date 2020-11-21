@@ -103,3 +103,13 @@
 - #20 Create Account Mutation 3
 
 - #21 The Way better handling error code
+
+- #22 Hashing Password
+
+  > https://typeorm.io/#/listeners-and-subscribers
+
+  ```bash
+  npm i bcrypt
+
+  npm i @types/bcrypt --dev-only
+  ```
