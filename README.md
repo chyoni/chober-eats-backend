@@ -117,3 +117,13 @@
 - #23 Login 1
 
 - #24 Login 2
+
+- #25 Login 3 (Generating JWT 1)
+
+  > https://randomkeygen.com/
+
+  ```bash
+  npm i jsonwebtoken
+
+  npm i @types/jsonwebtoken --only-dev
+  ```
