@@ -118,7 +118,7 @@
 
 - #24 Login 2
 
-- #25 Login 3 (Generating JWT 1)
+- #25 Create Our Module (Generating JWT 1, Login 3)
 
   > https://randomkeygen.com/
 
@@ -126,4 +126,9 @@
   npm i jsonwebtoken
 
   npm i @types/jsonwebtoken --only-dev
+
+  nest g mo jwt
+  nest g s jwt
   ```
+
+  > 모듈을 글로벌로 설정하면 (우리가 직접 만든 모듈에 Global decorator를 쓰던, forRoot() 옵션에 isGlobal:true을 하던) 다른 모듈에서 그 모듈의 Service를 사용하려 할 때, (비단 Service 뿐만 아니라) import에 굳이 Service를 넣을 필요 없이 바로 그냥 injection이 가능하다.
