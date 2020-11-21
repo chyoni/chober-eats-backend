@@ -16,5 +16,9 @@ export class UsersResolver {
   }
 
   @Mutation((returns) => CreateAccountOutput)
-  createAccount(@Args('input') createAccountInput: CreateAccountInput) {}
+  createAccount(
+    @Args('input') createAccountInput: CreateAccountInput,
+  ): Promise<boolean> {
+    return this.usersService.createAccount(createAccountInput);
+  }
 }
