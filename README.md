@@ -95,3 +95,5 @@
 - #16 Update Data with GraphQL, TypeORM 2
 
 - #17 Let's Start User Model (Real Clone)
+
+- #18 Create Account Mutation 1
