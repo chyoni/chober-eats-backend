@@ -93,3 +93,5 @@
 - #15 Update Data with GraphQL, TypeORM 1
 
 - #16 Update Data with GraphQL, TypeORM 2
+
+- #17 Let's Start User Model (Real Clone)
