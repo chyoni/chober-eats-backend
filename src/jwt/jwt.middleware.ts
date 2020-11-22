@@ -1,7 +1,29 @@
+import { Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
+import { type } from 'os';
+import { UsersService } from 'src/users/users.service';
+import { JwtService } from './jwt.service';
 
-export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
-  console.log(req.headers);
-  //모든 미들웨어는 수행할 것 다 수행한 후 next() 호출할 것
-  next();
+@Injectable()
+export class JwtMiddleware implements NestMiddleware {
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly usersService: UsersService,
+  ) {}
+  async use(req: Request, res: Response, next: NextFunction) {
+    if ('x-jwt' in req.headers) {
+      const token = req.headers['x-jwt'];
+      const decoded = this.jwtService.verify(token.toString());
+      if (typeof decoded === 'object' && decoded.hasOwnProperty('id')) {
+        try {
+          const user = await this.usersService.findUserById(decoded['id']);
+          req['user'] = user;
+        } catch (e) {
+          console.log('fefe');
+        }
+      }
+    }
+
+    next();
+  }
 }

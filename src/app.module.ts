@@ -12,7 +12,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { JwtModule } from './jwt/jwt.module';
-import { jwtMiddleware } from './jwt/jwt.middleware';
+import { JwtMiddleware } from './jwt/jwt.middleware';
 
 @Module({
   imports: [
@@ -53,13 +53,10 @@ import { jwtMiddleware } from './jwt/jwt.middleware';
   providers: [],
 })
 export class AppModule implements NestModule {
-  // NestModule을 implements 하고난 후,
-  //특정 모듈안에서만 middleware를 쓰고 싶을때는 그 특정 모듈안에서 이렇게 작성해주면 된다.
-  // 근데 AppModule은 모든 Module을 다 감싸고 있으니 전체에서 사용할 수 있긴 하지만, 여하튼 방법은 이렇다
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(jwtMiddleware).forRoutes({
+    consumer.apply(JwtMiddleware).forRoutes({
       path: '/graphql',
-      method: RequestMethod.POST,
+      method: RequestMethod.ALL,
     });
   }
 }

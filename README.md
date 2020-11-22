@@ -142,3 +142,5 @@
 - #27 Create Our Module 3
 
 - #28 Middlewars in NestJS
+
+- #29 JWT Middleware

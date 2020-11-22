@@ -65,4 +65,8 @@ export class UsersService {
       };
     }
   }
+
+  findUserById(id: number): Promise<User> {
+    return this.users.findOne({ id });
+  }
 }
