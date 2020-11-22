@@ -138,3 +138,5 @@
   > How to pass option into service (answer: Injection)
 
   > How to make forRoot option (answer: make interface class)
+
+- #27 Create Our Module 3
