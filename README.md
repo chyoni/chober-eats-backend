@@ -146,3 +146,11 @@
 - #29 JWT Middleware
 
 - #30 GraphQL Context
+
+- #31 Auth Guard
+
+  > https://docs.nestjs.com/guards
+
+  ```bash
+  nest g mo auth
+  ```
