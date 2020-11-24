@@ -104,4 +104,18 @@ export class UsersService {
     //정확히 우리가 원하는 것
     return this.users.save(user);
   }
+
+  async verifyEmail(code: string): Promise<Boolean> {
+    const verification = await this.verifications.findOne(
+      { code },
+      //{ loadRelationIds: true },
+      { relations: ['user'] },
+      // loadRelationIds 는 ID만 가져오고, relations은 record 전체를 가져온다 선택은 나의 몫.
+    );
+    if (verification) {
+      verification.user.verified = true;
+      await this.users.save(verification.user);
+    }
+    return false;
+  }
 }

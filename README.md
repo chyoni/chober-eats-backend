@@ -170,3 +170,5 @@
   ```bash
   npm i uuid
   ```
+
+- #38 Verifying User 1
