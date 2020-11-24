@@ -174,3 +174,5 @@
 - #38 Verifying User 1
 
 - #39 Verifying User 2 (TypeORM Column Option)
+
+- #40 Clean Code
