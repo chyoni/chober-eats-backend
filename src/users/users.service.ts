@@ -8,11 +8,14 @@ import { User } from './entities/user.entity';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from 'src/jwt/jwt.service';
 import { EditProfileInput } from './dtos/edit-profile.dto';
+import { Verification } from './entities/verification.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly users: Repository<User>,
+    @InjectRepository(Verification)
+    private readonly verifications: Repository<Verification>,
     private readonly config: ConfigService,
     private readonly jwtService: JwtService,
   ) {}
@@ -29,6 +32,11 @@ export class UsersService {
       }
       const newUser = this.users.create({ email, password, role });
       await this.users.save(newUser);
+      await this.verifications.save(
+        this.verifications.create({
+          user: newUser,
+        }),
+      );
       return { ok: true };
     } catch (e) {
       return { ok: false, error: 'Something wrong with create account 😫' };
@@ -78,6 +86,12 @@ export class UsersService {
     const user = await this.users.findOne({ id: userId });
     if (email) {
       user.email = email;
+      user.verified = false;
+      await this.verifications.save(
+        this.verifications.create({
+          user,
+        }),
+      );
     }
     if (password) {
       user.password = password;

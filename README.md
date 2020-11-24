@@ -164,3 +164,9 @@
 - #35 @BeforeUpdate() Condition
 
 - #36 Verification Entity
+
+- #37 Generate Random Code for Verification Code
+
+  ```bash
+  npm i uuid
+  ```
