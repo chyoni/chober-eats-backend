@@ -27,7 +27,9 @@ export class User extends CoreEntity {
   @IsEmail()
   email: string;
 
-  @Column()
+  //여기서 select:false를 하게되면 findOne을 쓰던 뭘 어찌됐던 이 Entity의 record하나를 찾을 때,
+  //해당 필드(select:false로 한 필드)는 찾아주지 않는다. 즉, 데이터에 포함시켜주지 않을 것이다.
+  @Column({ select: false })
   @Field((type) => String)
   @IsString()
   password: string;
@@ -44,11 +46,13 @@ export class User extends CoreEntity {
   @BeforeInsert()
   @BeforeUpdate()
   async hashPassword(): Promise<void> {
-    try {
-      this.password = await bcrypt.hash(this.password, 10);
-    } catch (e) {
-      console.log(e);
-      throw new InternalServerErrorException();
+    if (this.password) {
+      try {
+        this.password = await bcrypt.hash(this.password, 10);
+      } catch (e) {
+        console.log(e);
+        throw new InternalServerErrorException();
+      }
     }
   }
 
