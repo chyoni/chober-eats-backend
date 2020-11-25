@@ -176,3 +176,13 @@
 - #39 Verifying User 2 (TypeORM Column Option)
 
 - #40 Clean Code
+
+- #41 Mail Module Setup
+
+  ```bash
+  nest g mo mail
+
+  npm i got
+
+  npm i form-data
+  ```
