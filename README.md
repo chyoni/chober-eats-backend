@@ -186,3 +186,5 @@
 
   npm i form-data
   ```
+
+- #42 Verify Email DONE

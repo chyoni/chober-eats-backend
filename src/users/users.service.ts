@@ -14,6 +14,7 @@ import { EditProfileInput, EditProfileOutput } from './dtos/edit-profile.dto';
 import { Verification } from './entities/verification.entity';
 import { UserProfileOutput } from './dtos/user-profile.dto';
 import { VerifyEmailInput, VerifyEmailOutput } from './dtos/verify-email.dto';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class UsersService {
@@ -23,6 +24,7 @@ export class UsersService {
     private readonly verifications: Repository<Verification>,
     private readonly config: ConfigService,
     private readonly jwtService: JwtService,
+    private readonly mailSerivce: MailService,
   ) {}
 
   async createAccount({
@@ -37,11 +39,9 @@ export class UsersService {
       }
       const newUser = this.users.create({ email, password, role });
       await this.users.save(newUser);
-      await this.verifications.save(
-        this.verifications.create({
-          user: newUser,
-        }),
-      );
+      const verification = this.verifications.create({ user: newUser });
+      await this.verifications.save(verification);
+      this.mailSerivce.sendVerificationEmail(newUser.email, verification.code);
       return { ok: true };
     } catch (e) {
       return { ok: false, error: 'Something wrong with create account 😫' };
@@ -115,11 +115,9 @@ export class UsersService {
       if (email) {
         user.email = email;
         user.verified = false;
-        await this.verifications.save(
-          this.verifications.create({
-            user,
-          }),
-        );
+        const verification = this.verifications.create({ user });
+        await this.verifications.save(verification);
+        this.mailSerivce.sendVerificationEmail(user.email, verification.code);
       }
       if (password) {
         user.password = password;
