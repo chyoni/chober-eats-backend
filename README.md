@@ -190,3 +190,7 @@
 - #42 Verify Email DONE
 
 - #43 Unit Test Part 1 (UserSerivce)
+
+- #44 Unit Test Part 2 (UserService)
+
+  > Mocking (Fake function)
