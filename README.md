@@ -200,3 +200,5 @@
   > Mocking (Fake function)
 
 - #46 Unit Test Part 4 (UserService-login)
+
+- #47 Unit Test Part 5 (UserService-getUser)

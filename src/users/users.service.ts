@@ -85,7 +85,7 @@ export class UsersService {
   async getUserById(id: number): Promise<UserProfileOutput> {
     try {
       const anonymousUser = await this.users.findOne({ id });
-      if (!anonymousUser) {
+      if (anonymousUser === undefined) {
         return {
           ok: false,
           error: `User doesn't exist with this ID ${id}`,
