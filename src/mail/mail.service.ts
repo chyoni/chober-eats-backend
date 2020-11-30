@@ -11,7 +11,6 @@ export class MailService {
   ) {}
 
   private async sendEmail(subject: string, content: string): Promise<void> {
-    console.log(this.mailOptions.domain, this.mailOptions.apiKey);
     const form = new FormData();
     form.append('from', `Excited User <mailgun@${this.mailOptions.domain}>`);
     form.append('to', 'chiwon99881@gmail.com');

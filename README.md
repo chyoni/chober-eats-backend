@@ -194,3 +194,7 @@
 - #44 Unit Test Part 2 (UserService)
 
   > Mocking (Fake function)
+
+- #45 Unit Test Part 3 (UserService)
+
+  > Mocking (Fake function)
