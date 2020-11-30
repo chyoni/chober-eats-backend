@@ -8,7 +8,6 @@ import {
 } from './dtos/create-account.dto';
 import { LoginInput, LoginOutput } from './dtos/login.dto';
 import { User } from './entities/user.entity';
-import { ConfigService } from '@nestjs/config';
 import { JwtService } from 'src/jwt/jwt.service';
 import { EditProfileInput, EditProfileOutput } from './dtos/edit-profile.dto';
 import { Verification } from './entities/verification.entity';
@@ -22,7 +21,6 @@ export class UsersService {
     @InjectRepository(User) private readonly users: Repository<User>,
     @InjectRepository(Verification)
     private readonly verifications: Repository<Verification>,
-    private readonly config: ConfigService,
     private readonly jwtService: JwtService,
     private readonly mailSerivce: MailService,
   ) {}

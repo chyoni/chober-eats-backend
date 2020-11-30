@@ -188,3 +188,5 @@
   ```
 
 - #42 Verify Email DONE
+
+- #43 Unit Test Part 1 (UserSerivce)
