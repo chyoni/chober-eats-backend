@@ -210,3 +210,5 @@
 - #50 Unit Test Part 8 (UserService- DONE)
 
 - #51 Unit Test Part 9 (JwtService-Setup)
+
+- #52 Unit Test Part 10 (JwtService-Sign)
