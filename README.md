@@ -206,3 +206,5 @@
 - #48 Unit Test Part 6 (UserService-editProfile 1)
 
 - #49 Unit Test Part 7 (UserService-editProfile 2)
+
+- #50 Unit Test Part 8 (UserService- DONE)

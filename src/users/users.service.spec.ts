@@ -11,6 +11,7 @@ const mockRepository = () => ({
   findOne: jest.fn(),
   create: jest.fn(),
   save: jest.fn(),
+  delete: jest.fn(),
 });
 
 const mockJwtService = () => ({
@@ -313,5 +314,70 @@ describe('UserService', () => {
     });
   });
 
-  it.todo('verifyEmail');
+  describe('verifyEmail', () => {
+    it('should be verified', async () => {
+      const preVerification = {
+        id: 1,
+        user: {
+          verified: false,
+        },
+      };
+      const postVerification = {
+        id: 1,
+        user: {
+          verified: true,
+        },
+      };
+      verificationRepository.findOne.mockResolvedValue(preVerification);
+      const result = await service.verifyEmail({ code: 'code' });
+
+      expect(verificationRepository.findOne).toHaveBeenCalledTimes(1);
+      expect(verificationRepository.findOne).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+      );
+
+      expect(usersRepository.save).toHaveBeenCalledTimes(1);
+      expect(usersRepository.save).toHaveBeenCalledWith(postVerification.user);
+
+      expect(verificationRepository.delete).toHaveBeenCalledTimes(1);
+      expect(verificationRepository.delete).toHaveBeenCalledWith(
+        preVerification.id,
+      );
+
+      expect(result).toEqual({ ok: true });
+    });
+
+    it('should error on verification not found', async () => {
+      verificationRepository.findOne.mockResolvedValue(undefined);
+      const result = await service.verifyEmail({ code: 'code' });
+
+      expect(verificationRepository.findOne).toHaveBeenCalledTimes(1);
+      expect(verificationRepository.findOne).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+      );
+
+      expect(result).toEqual({
+        ok: false,
+        error: expect.anything(),
+      });
+    });
+
+    it('should error on exception', async () => {
+      verificationRepository.findOne.mockRejectedValue(new Error());
+      const result = await service.verifyEmail({ code: 'code' });
+
+      expect(verificationRepository.findOne).toHaveBeenCalledTimes(1);
+      expect(verificationRepository.findOne).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+      );
+
+      expect(result).toEqual({
+        ok: false,
+        error: expect.anything(),
+      });
+    });
+  });
 });
