@@ -13,10 +13,10 @@ const mockRepository = () => ({
   save: jest.fn(),
 });
 
-const mockJwtService = {
+const mockJwtService = () => ({
   sign: jest.fn(() => 'token'),
   verify: jest.fn(),
-};
+});
 
 const mockMailService = () => ({
   sendVerificationEmail: jest.fn(),
@@ -45,7 +45,7 @@ describe('UserService', () => {
         },
         {
           provide: JwtService,
-          useValue: mockJwtService,
+          useValue: mockJwtService(),
         },
         {
           provide: MailService,
@@ -267,6 +267,49 @@ describe('UserService', () => {
         newUser.email,
         newVerification.code,
       );
+    });
+
+    it('should change password', async () => {
+      const oldUser = {
+        userId: 1,
+        password: 'old password',
+      };
+      const inputArgs = {
+        userId: 1,
+        input: {
+          password: 'new password',
+        },
+      };
+      const newUser = {
+        userId: 1,
+        password: 'new password',
+      };
+      usersRepository.findOne.mockResolvedValue(oldUser);
+      usersRepository.save.mockResolvedValue(newUser);
+      const result = await service.editProfile(oldUser.userId, inputArgs.input);
+      expect(usersRepository.save).toHaveBeenCalledTimes(1);
+      expect(usersRepository.save).toHaveBeenCalledWith(newUser);
+      expect(result).toEqual({
+        ok: true,
+      });
+    });
+
+    it('should fail on exception', async () => {
+      const inputArgs = {
+        userId: 1,
+        input: {
+          email: 'error@email.com',
+        },
+      };
+      usersRepository.findOne.mockRejectedValue(new Error());
+      const result = await service.editProfile(
+        inputArgs.userId,
+        inputArgs.input,
+      );
+      expect(result).toEqual({
+        ok: false,
+        error: expect.anything(),
+      });
     });
   });
 
