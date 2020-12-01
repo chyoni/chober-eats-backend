@@ -18,9 +18,9 @@ const mockJwtService = {
   verify: jest.fn(),
 };
 
-const mockMailService = {
+const mockMailService = () => ({
   sendVerificationEmail: jest.fn(),
-};
+});
 
 type MockRepository<T = any> = Partial<Record<keyof Repository<T>, jest.Mock>>;
 
@@ -49,7 +49,7 @@ describe('UserService', () => {
         },
         {
           provide: MailService,
-          useValue: mockMailService,
+          useValue: mockMailService(),
         },
       ],
     }).compile();
@@ -224,6 +224,51 @@ describe('UserService', () => {
       });
     });
   });
-  it.todo('editProfile');
+
+  describe('editProfile', () => {
+    it('should change email', async () => {
+      const oldUser = {
+        verified: true,
+        email: 'old@old.com',
+      };
+      const editArgs = {
+        userId: 1,
+        input: {
+          email: 'new@new.com',
+        },
+      };
+      const newUser = {
+        verified: false,
+        email: 'new@new.com',
+      };
+      const newVerification = {
+        code: 'code',
+        user: newUser,
+      };
+      usersRepository.findOne.mockResolvedValue(oldUser);
+      verificationRepository.create.mockReturnValue(newVerification);
+      verificationRepository.save.mockResolvedValue(newVerification);
+      await service.editProfile(editArgs.userId, editArgs.input);
+
+      expect(usersRepository.findOne).toHaveBeenCalledTimes(1);
+      expect(usersRepository.findOne).toHaveBeenCalledWith({
+        id: editArgs.userId,
+      });
+
+      expect(verificationRepository.create).toHaveBeenCalledTimes(1);
+      expect(verificationRepository.create).toHaveBeenCalledWith({
+        user: newUser,
+      });
+      expect(verificationRepository.save).toHaveBeenCalledTimes(1);
+      expect(verificationRepository.save).toHaveBeenCalledWith(newVerification);
+
+      expect(mailService.sendVerificationEmail).toHaveBeenCalledTimes(1);
+      expect(mailService.sendVerificationEmail).toHaveBeenCalledWith(
+        newUser.email,
+        newVerification.code,
+      );
+    });
+  });
+
   it.todo('verifyEmail');
 });

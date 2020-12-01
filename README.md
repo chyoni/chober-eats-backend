@@ -202,3 +202,5 @@
 - #46 Unit Test Part 4 (UserService-login)
 
 - #47 Unit Test Part 5 (UserService-getUser)
+
+- #48 Unit Test Part 6 (UserService-editProfile 1)
