@@ -216,3 +216,5 @@
 - #53 Unit Test Part 11 (JwtService-DONE, MailService)
 
 - #54 Unit Test Part 12 (MailService-sendVerificationEmail)
+
+- #55 Unit Test Part 13 (MailService-sendEmail)

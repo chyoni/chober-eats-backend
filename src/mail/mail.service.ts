@@ -10,7 +10,7 @@ export class MailService {
     @Inject(CONFIG_OPTIONS) private readonly mailOptions: MailModuleOptions,
   ) {}
 
-  async sendEmail(subject: string, content: string): Promise<void> {
+  async sendEmail(subject: string, content: string): Promise<Boolean> {
     const form = new FormData();
     form.append('from', `Excited User <mailgun@${this.mailOptions.domain}>`);
     form.append('to', 'chiwon99881@gmail.com');
@@ -20,7 +20,7 @@ export class MailService {
     //curl -s --user 'api:YOUR_API_KEY' \ 이렇게 되어있으면
     //header에 Basic Buffer.from('api:YOUR_API_KEY).toString('base64') 로 기입해야 한다.
     try {
-      const res = await got.post(
+      await got.post(
         `https://api.mailgun.net/v3/${this.mailOptions.domain}/messages`,
         {
           headers: {
@@ -31,8 +31,10 @@ export class MailService {
           body: form,
         },
       );
+      return true;
     } catch (error) {
       console.log(error);
+      return false;
     }
   }
 
