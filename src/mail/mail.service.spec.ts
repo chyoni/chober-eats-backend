@@ -34,4 +34,23 @@ describe('MailService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  describe('sendVerificationEmail', () => {
+    it('should call sendEmail', () => {
+      const sendVerificationEmailArgs = {
+        email: 'email@email.com',
+        code: 'code',
+      };
+      jest.spyOn(service, 'sendEmail').mockImplementation(async () => {});
+      service.sendVerificationEmail(
+        sendVerificationEmailArgs.email,
+        sendVerificationEmailArgs.code,
+      );
+      expect(service.sendEmail).toHaveBeenCalledTimes(1);
+      expect(service.sendEmail).toHaveBeenCalledWith(
+        expect.any(String),
+        expect.any(String),
+      );
+    });
+  });
 });

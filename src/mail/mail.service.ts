@@ -10,7 +10,7 @@ export class MailService {
     @Inject(CONFIG_OPTIONS) private readonly mailOptions: MailModuleOptions,
   ) {}
 
-  private async sendEmail(subject: string, content: string): Promise<void> {
+  async sendEmail(subject: string, content: string): Promise<void> {
     const form = new FormData();
     form.append('from', `Excited User <mailgun@${this.mailOptions.domain}>`);
     form.append('to', 'chiwon99881@gmail.com');
@@ -39,7 +39,7 @@ export class MailService {
   sendVerificationEmail(email: string, code: string): void {
     this.sendEmail(
       'Verify Your Email',
-      ` <h1>Hello ${email}</h1> 
+      `<h1>Hello ${email}</h1>
       Copy this Code: <span style="color:black; font-size:50px">${code}</span>`,
     );
   }
