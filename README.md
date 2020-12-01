@@ -208,3 +208,5 @@
 - #49 Unit Test Part 7 (UserService-editProfile 2)
 
 - #50 Unit Test Part 8 (UserService- DONE)
+
+- #51 Unit Test Part 9 (JwtService-Setup)
