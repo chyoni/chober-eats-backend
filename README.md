@@ -218,3 +218,13 @@
 - #54 Unit Test Part 12 (MailService-sendVerificationEmail)
 
 - #55 Unit Test Part 13 (MailService-sendEmail)
+
+- #56 E2E Test 1
+
+  > .env.dev 파일안에 있는 내용을 복사해서 .env.test 파일에 붙여넣는다.
+
+  > 그 파일안에 DB_NAME만 변경해준다 왜냐면 기존에 사용하던 실제 DB가 아니라 테스트용으로 사용하고 싶으니까
+
+  > 뭐 DB이름이 chober-eats였으면 chober-eats-test 이런식으로
+
+  > 그리고 DB를 하나 생성한다 .env.test 파일에 작성한 DB이름으로
