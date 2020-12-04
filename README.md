@@ -232,3 +232,5 @@
 - #57 E2E Test 2 (How to send real GraphQL data)
 
 - #58 E2E Test 3 (createAccount DONE)
+
+- #59 E2E Test 4 (login)
