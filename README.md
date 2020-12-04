@@ -244,3 +244,9 @@
 - #62 E2E Test 8 (verifyEmail)
 
 - #63 E2E Test 9 (Restaurant Model)
+
+- #64 Set Relationship and seperate type
+
+  > set relationship with restaurants and user
+
+  > Seperate Input Type and Object Type

@@ -8,7 +8,8 @@ import {
 import * as bcrypt from 'bcrypt';
 import { IsEmail, IsEnum, IsString } from 'class-validator';
 import { CoreEntity } from 'src/common/entities/core.entity';
-import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
+import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany } from 'typeorm';
 
 enum UserRole {
   Owner,
@@ -18,7 +19,7 @@ enum UserRole {
 
 registerEnumType(UserRole, { name: 'UserRole' });
 
-@InputType({ isAbstract: true })
+@InputType('UserInputType', { isAbstract: true })
 @ObjectType()
 @Entity()
 export class User extends CoreEntity {
@@ -42,6 +43,12 @@ export class User extends CoreEntity {
   @Column({ default: false })
   @Field((type) => Boolean)
   verified: boolean;
+
+  @Field((type) => [Restaurant], { nullable: true })
+  @OneToMany((type) => Restaurant, (restaurant) => restaurant.owner, {
+    nullable: true,
+  })
+  restaurants: Restaurant[];
 
   @BeforeInsert()
   @BeforeUpdate()
