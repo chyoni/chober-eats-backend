@@ -236,3 +236,5 @@
 - #59 E2E Test 4 (login)
 
 - #60 E2E Test 5 (userProfile)
+
+- #61 E2E Test 6 (me)
