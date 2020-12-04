@@ -242,3 +242,5 @@
 - #61 E2E Test 7 (editProfile)
 
 - #62 E2E Test 8 (verifyEmail)
+
+- #63 E2E Test 9 (Restaurant Model)

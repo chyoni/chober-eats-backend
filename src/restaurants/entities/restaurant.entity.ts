@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import {
   IsBoolean,
   IsNumber,
@@ -6,33 +6,31 @@ import {
   IsString,
   Length,
 } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { CoreEntity } from 'src/common/entities/core.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Category } from './category.entity';
 
+@InputType({ isAbstract: true })
 @ObjectType()
 @Entity()
-export class Restaurant {
-  @PrimaryGeneratedColumn()
-  @Field((type) => Number)
-  @IsNumber()
-  id: number;
-
+export class Restaurant extends CoreEntity {
   @Field((type) => String)
-  @Column()
+  @Column({ unique: true })
   @IsString()
   @Length(5, 10)
   name: string;
 
-  //nullable은 말그대로 null이 가능하냐마냐를 묻는거고,
-  //defaultValue는 DTO에 애시당초에 값이 들어감 거기서 변경을 하지 않는이상 이 필드는
-  //DTO에 추가되서 데이터베이스에 들어간다.
-  @Field((type) => Boolean, { nullable: true, defaultValue: true })
-  @Column({ default: true })
-  @IsOptional() //해당 필드는 필수가 아닌 옵션
-  @IsBoolean()
-  isGood?: boolean;
+  @Field((type) => String)
+  @Column()
+  @IsString()
+  coverImage: string;
 
   @Field((type) => String)
   @Column()
   @IsString()
-  ownerName: string;
+  address: string;
+
+  @Field((type) => Category)
+  @ManyToOne((type) => Category, (category) => category.restaurants)
+  category: Category;
 }
