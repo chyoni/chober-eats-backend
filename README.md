@@ -234,3 +234,5 @@
 - #58 E2E Test 3 (createAccount DONE)
 
 - #59 E2E Test 4 (login)
+
+- #60 E2E Test 5 (userProfile)
