@@ -238,3 +238,5 @@
 - #60 E2E Test 5 (userProfile)
 
 - #61 E2E Test 6 (me)
+
+- #61 E2E Test 7 (editProfile)

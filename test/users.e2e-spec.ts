@@ -267,6 +267,119 @@ describe('UserModule (e2e)', () => {
     });
   });
 
+  describe('edtiProfile', () => {
+    const NEW_EMAIL = 'n4n4@n4n4.com';
+    const NEW_PASSWORD = '67890';
+
+    it('should change email', () => {
+      return request(app.getHttpServer())
+        .post(GRAPHQL_ENDPOINT)
+        .set('X-JWT', jwtToken)
+        .send({
+          query: `mutation {
+          editProfile(input: {
+            email: "${NEW_EMAIL}"
+          }) {
+            ok
+            error
+          }
+        }`,
+        })
+        .expect(200)
+        .expect((res) => {
+          const {
+            body: {
+              data: {
+                editProfile: { ok, error },
+              },
+            },
+          } = res;
+          expect(ok).toBe(true);
+          expect(error).toBe(null);
+        })
+        .then(() => {
+          return request(app.getHttpServer())
+            .post(GRAPHQL_ENDPOINT)
+            .set('X-JWT', jwtToken)
+            .send({
+              query: `{
+              me {
+                id
+                email
+              }
+            }`,
+            })
+            .expect(200)
+            .expect((res) => {
+              const {
+                body: {
+                  data: {
+                    me: { email },
+                  },
+                },
+              } = res;
+              expect(email).toBe(NEW_EMAIL);
+            });
+        });
+    });
+
+    it('should change password', () => {
+      return request(app.getHttpServer())
+        .post(GRAPHQL_ENDPOINT)
+        .set('X-JWT', jwtToken)
+        .send({
+          query: `mutation {
+          editProfile(input: {
+            password: "${NEW_PASSWORD}"
+          }) {
+            ok
+            error
+          }
+        }`,
+        })
+        .expect(200)
+        .expect((res) => {
+          const {
+            body: {
+              data: {
+                editProfile: { ok, error },
+              },
+            },
+          } = res;
+          expect(ok).toBe(true);
+          expect(error).toBe(null);
+        })
+        .then(() => {
+          return request(app.getHttpServer())
+            .post(GRAPHQL_ENDPOINT)
+            .set('X-JWT', jwtToken)
+            .send({
+              query: `mutation {
+              login(input: {
+                email:"${NEW_EMAIL}",
+                password: "${NEW_PASSWORD}"
+              }) {
+                ok
+                error
+                token
+              }
+            }`,
+            })
+            .expect(200)
+            .expect((res) => {
+              const {
+                body: {
+                  data: {
+                    login: { ok, error, token },
+                  },
+                },
+              } = res;
+              expect(ok).toBe(true);
+              expect(error).toBe(null);
+              expect(token).toEqual(expect.any(String));
+            });
+        });
+    });
+  });
   it.todo('verifyEmail');
-  it.todo('edtiProfile');
 });
