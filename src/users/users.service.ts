@@ -154,7 +154,7 @@ export class UsersService {
           ok: true,
         };
       }
-      throw new Error();
+      throw new Error('wrong code');
     } catch (error) {
       return {
         ok: false,

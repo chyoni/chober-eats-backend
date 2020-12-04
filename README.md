@@ -240,3 +240,5 @@
 - #61 E2E Test 6 (me)
 
 - #61 E2E Test 7 (editProfile)
+
+- #62 E2E Test 8 (verifyEmail)
