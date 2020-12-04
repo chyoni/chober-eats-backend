@@ -230,3 +230,5 @@
   > 그리고 DB를 하나 생성한다 .env.test 파일에 작성한 DB이름으로
 
 - #57 E2E Test 2 (How to send real GraphQL data)
+
+- #58 E2E Test 3 (createAccount DONE)
