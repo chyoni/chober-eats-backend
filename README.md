@@ -258,3 +258,7 @@
 - #67 Authenticated with Role Part 1
 
 - #68 Authenticated with Role Part 2
+
+- #69 Authenticated with Role DONE
+
+  > SetMetaData

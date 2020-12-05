@@ -8,7 +8,7 @@ import { AuthGuard } from './auth.guard';
   providers: [
     {
       provide: APP_GUARD,
-      useValue: AuthGuard,
+      useClass: AuthGuard,
     },
   ],
 })
