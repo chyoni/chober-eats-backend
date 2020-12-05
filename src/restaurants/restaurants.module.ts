@@ -6,7 +6,7 @@ import { RestaurantService } from './entities/restaurants.service';
 import { RestaurantResolver } from './restaurants.resolver';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Restaurant])],
+  imports: [TypeOrmModule.forFeature([Restaurant, Category])],
   providers: [RestaurantResolver, RestaurantService],
 })
 export class RestaurantsModule {}

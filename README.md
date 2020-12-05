@@ -252,3 +252,5 @@
   > Seperate Input Type and Object Type
 
 - #65 Create Restaurant Part 1
+
+- #66 Create Restaurant Part 2
