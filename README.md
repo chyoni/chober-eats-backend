@@ -256,3 +256,5 @@
 - #66 Create Restaurant Part 2
 
 - #67 Authenticated with Role Part 1
+
+- #68 Authenticated with Role Part 2
