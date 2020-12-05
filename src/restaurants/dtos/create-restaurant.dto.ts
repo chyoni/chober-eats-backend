@@ -1,4 +1,5 @@
-import { InputType, OmitType } from '@nestjs/graphql';
+import { InputType, ObjectType, OmitType } from '@nestjs/graphql';
+import { CoreOutput } from 'src/common/dtos/output.dto';
 import { Restaurant } from '../entities/restaurant.entity';
 
 // InputType은 하나의 Object로 표현되지만 ArgumentType은 각각의 프로퍼티를 사용하게끔 할 수 있다.
@@ -14,8 +15,11 @@ import { Restaurant } from '../entities/restaurant.entity';
 //그래서 Parent와 Child의 Type이 이처럼, InputType ObjectType으로 다를 때,
 //리턴하는 타입을 명시해줄 수 있음 그래서 3번째 args로 InputType을 넣은것
 @InputType()
-export class CreateRestaurantDto extends OmitType(
+export class CreateRestaurantInput extends OmitType(
   Restaurant,
-  ['id'],
+  ['id', 'owner', 'category'],
   InputType,
 ) {}
+
+@ObjectType()
+export class CreateRestaurantOutput extends CoreOutput {}

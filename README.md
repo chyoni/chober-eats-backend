@@ -250,3 +250,5 @@
   > set relationship with restaurants and user
 
   > Seperate Input Type and Object Type
+
+- #65 Create Restaurant Part 1
