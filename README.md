@@ -266,3 +266,5 @@
 - #70 Edit Restaurant Resolver
 
 - #71 Edit Restaurant Resolver 2
+
+- #72 Edit Restaurant Resolver DONE
