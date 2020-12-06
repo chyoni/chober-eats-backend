@@ -262,3 +262,5 @@
 - #69 Authenticated with Role DONE
 
   > SetMetaData
+
+- #70 Edit Restaurant Resolver
