@@ -268,3 +268,5 @@
 - #71 Edit Restaurant Resolver 2
 
 - #72 Edit Restaurant Resolver DONE
+
+- #73 Delete Restaurant Resolver DONE

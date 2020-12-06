@@ -13,6 +13,10 @@ import {
 import { CategoryRepository } from './repositories/category.repository';
 import { Category } from './entities/category.entity';
 import { Restaurant } from './entities/restaurant.entity';
+import {
+  DeleteRestaurantInput,
+  DeleteRestaurantOutput,
+} from './dtos/delete-restaurant.dto';
 
 @Injectable()
 export class RestaurantService {
@@ -78,6 +82,39 @@ export class RestaurantService {
           ...(category && { category }),
         },
       ]);
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error,
+      };
+    }
+  }
+
+  async deleteRestaurant(
+    owner: User,
+    deleteRestaurantInput: DeleteRestaurantInput,
+  ): Promise<DeleteRestaurantOutput> {
+    try {
+      const restaurant = await this.restaurants.findOne({
+        id: deleteRestaurantInput.restaurantId,
+      });
+      console.log(restaurant);
+      if (!restaurant) {
+        return {
+          ok: false,
+          error: 'Restaurant not found.',
+        };
+      }
+      if (owner.id !== restaurant.ownerId) {
+        return {
+          ok: false,
+          error: `You can't delete if not your's restaurants.`,
+        };
+      }
+      await this.restaurants.delete({ id: restaurant.id });
       return {
         ok: true,
       };
