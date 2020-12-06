@@ -270,3 +270,7 @@
 - #72 Edit Restaurant Resolver DONE
 
 - #73 Delete Restaurant Resolver DONE
+
+- #74 Category Resolver 1
+
+  > @Parent()
