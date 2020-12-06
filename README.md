@@ -264,3 +264,5 @@
   > SetMetaData
 
 - #70 Edit Restaurant Resolver
+
+- #71 Edit Restaurant Resolver 2
