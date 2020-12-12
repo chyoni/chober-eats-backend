@@ -274,3 +274,5 @@
 - #74 Category Resolver 1
 
   > @Parent()
+
+- #75 Get Category by CategorySlug

@@ -13,6 +13,7 @@ import { Role } from 'src/auth/role.decorator';
 import { CoreOutput } from 'src/common/dtos/output.dto';
 import { User } from 'src/users/entities/user.entity';
 import { AllCategoryOutput } from './dtos/all-categories.dto';
+import { CategoryInput, CategoryOutput } from './dtos/category.dto';
 import {
   CreateRestaurantInput,
   CreateRestaurantOutput,
@@ -94,5 +95,10 @@ export class CategoryResolver {
   @Query((type) => AllCategoryOutput)
   allCategories(): Promise<AllCategoryOutput> {
     return this.restaurantService.getAllCategories();
+  }
+
+  @Query((type) => CategoryOutput)
+  category(@Args() categoryInput: CategoryInput): Promise<CategoryOutput> {
+    return this.restaurantService.findCategoryBySlug(categoryInput);
   }
 }
