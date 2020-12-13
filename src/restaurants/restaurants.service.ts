@@ -26,12 +26,15 @@ import {
   SearchRestaurantOutput,
 } from './dtos/search-restaurant.dto';
 import { CreateDishInput, CreateDishOutput } from './dtos/create-dish.dto';
+import { Dish } from './entities/dish.entity';
 
 @Injectable()
 export class RestaurantService {
   constructor(
     @InjectRepository(Restaurant) //@InjectRepository()를 사용하여 TypeORM Entity를 Repository로 사용할 수 있다.
     private readonly restaurants: Repository<Restaurant>,
+    @InjectRepository(Dish)
+    private readonly dishes: Repository<Dish>,
     private readonly categories: CategoryRepository,
   ) {}
 
@@ -213,9 +216,12 @@ export class RestaurantService {
     restaurantInput: RestaurantInput,
   ): Promise<RestaurantOutput> {
     try {
-      const restaurant = await this.restaurants.findOneOrFail({
-        id: restaurantInput.restaurantId,
-      });
+      const restaurant = await this.restaurants.findOneOrFail(
+        {
+          id: restaurantInput.restaurantId,
+        },
+        { relations: ['menu'] },
+      );
       return {
         ok: true,
         restaurant,
@@ -260,6 +266,26 @@ export class RestaurantService {
     createDishInput: CreateDishInput,
   ): Promise<CreateDishOutput> {
     try {
+      const restaurant = await this.restaurants.findOne({
+        id: createDishInput.restaurantId,
+      });
+      if (!restaurant) {
+        return {
+          ok: false,
+          error: 'Could not found selected restaurant.',
+        };
+      }
+      if (restaurant.ownerId !== owner.id) {
+        return {
+          ok: false,
+          error: "You could not create dish if not your's restaurant.",
+        };
+      }
+      const dish = this.dishes.create({ ...createDishInput, restaurant });
+      await this.dishes.save(dish);
+      return {
+        ok: true,
+      };
     } catch (error) {
       return {
         ok: false,
