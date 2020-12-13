@@ -288,3 +288,5 @@
   > https://github.com/typeorm/typeorm/blob/master/docs/find-options.md#advanced-options
 
 - #79 Dish entity
+
+- #80 Create dish part 1

@@ -25,6 +25,7 @@ import {
   SearchRestaurantInput,
   SearchRestaurantOutput,
 } from './dtos/search-restaurant.dto';
+import { CreateDishInput, CreateDishOutput } from './dtos/create-dish.dto';
 
 @Injectable()
 export class RestaurantService {
@@ -33,6 +34,28 @@ export class RestaurantService {
     private readonly restaurants: Repository<Restaurant>,
     private readonly categories: CategoryRepository,
   ) {}
+
+  async allRestaurants(
+    restaurantsInput: RestaurantsInput,
+  ): Promise<RestaurantsOutput> {
+    try {
+      const [restaurants, totalResults] = await this.restaurants.findAndCount({
+        take: 25,
+        skip: (restaurantsInput.page - 1) * 25,
+      });
+      return {
+        ok: true,
+        results: restaurants,
+        totalPages: Math.ceil(totalResults / 25),
+        totalItems: totalResults,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error,
+      };
+    }
+  }
 
   async createRestaurant(
     owner: User,
@@ -186,28 +209,6 @@ export class RestaurantService {
     }
   }
 
-  async allRestaurants(
-    restaurantsInput: RestaurantsInput,
-  ): Promise<RestaurantsOutput> {
-    try {
-      const [restaurants, totalResults] = await this.restaurants.findAndCount({
-        take: 25,
-        skip: (restaurantsInput.page - 1) * 25,
-      });
-      return {
-        ok: true,
-        results: restaurants,
-        totalPages: Math.ceil(totalResults / 25),
-        totalItems: totalResults,
-      };
-    } catch (error) {
-      return {
-        ok: false,
-        error,
-      };
-    }
-  }
-
   async getRestaurantById(
     restaurantInput: RestaurantInput,
   ): Promise<RestaurantOutput> {
@@ -246,6 +247,19 @@ export class RestaurantService {
         totalItems: totalResults,
         totalPages: Math.ceil(totalResults / 25),
       };
+    } catch (error) {
+      return {
+        ok: false,
+        error,
+      };
+    }
+  }
+
+  async createDish(
+    owner: User,
+    createDishInput: CreateDishInput,
+  ): Promise<CreateDishOutput> {
+    try {
     } catch (error) {
       return {
         ok: false,
