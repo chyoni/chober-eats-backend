@@ -19,6 +19,7 @@ import {
 } from './dtos/delete-restaurant.dto';
 import { AllCategoryOutput } from './dtos/all-categories.dto';
 import { CategoryInput, CategoryOutput } from './dtos/category.dto';
+import { RestaurantsInput, RestaurantsOutput } from './dtos/restaurants.dto';
 
 @Injectable()
 export class RestaurantService {
@@ -165,12 +166,34 @@ export class RestaurantService {
         take: 25,
         skip: (categoryInput.page - 1) * 25,
       });
-      category.restaurants = restaurants;
       const totalResults = await this.restaurantCount(category);
       return {
         ok: true,
         category,
+        restaurants,
         totalPages: Math.ceil(totalResults / 25),
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error,
+      };
+    }
+  }
+
+  async allRestaurants(
+    restaurantsInput: RestaurantsInput,
+  ): Promise<RestaurantsOutput> {
+    try {
+      const [restaurants, totalResults] = await this.restaurants.findAndCount({
+        take: 25,
+        skip: (restaurantsInput.page - 1) * 25,
+      });
+      return {
+        ok: true,
+        results: restaurants,
+        totalPages: Math.ceil(totalResults / 25),
+        totalItems: totalResults,
       };
     } catch (error) {
       return {

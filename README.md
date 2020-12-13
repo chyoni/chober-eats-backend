@@ -278,3 +278,5 @@
 - #75 Get Category by CategorySlug
 
 - #76 Pagination for get restaurants by category
+
+- #77 See all restaurants
