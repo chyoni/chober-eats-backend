@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/users/entities/user.entity';
-import { Repository } from 'typeorm';
+import { ILike, Like, Raw, Repository } from 'typeorm';
 import {
   CreateRestaurantInput,
   CreateRestaurantOutput,
@@ -20,6 +20,11 @@ import {
 import { AllCategoryOutput } from './dtos/all-categories.dto';
 import { CategoryInput, CategoryOutput } from './dtos/category.dto';
 import { RestaurantsInput, RestaurantsOutput } from './dtos/restaurants.dto';
+import { RestaurantInput, RestaurantOutput } from './dtos/restaurant.dto';
+import {
+  SearchRestaurantInput,
+  SearchRestaurantOutput,
+} from './dtos/search-restaurant.dto';
 
 @Injectable()
 export class RestaurantService {
@@ -194,6 +199,52 @@ export class RestaurantService {
         results: restaurants,
         totalPages: Math.ceil(totalResults / 25),
         totalItems: totalResults,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error,
+      };
+    }
+  }
+
+  async getRestaurantById(
+    restaurantInput: RestaurantInput,
+  ): Promise<RestaurantOutput> {
+    try {
+      const restaurant = await this.restaurants.findOneOrFail({
+        id: restaurantInput.restaurantId,
+      });
+      return {
+        ok: true,
+        restaurant,
+      };
+    } catch {
+      return {
+        ok: false,
+        error: `can't find the restaurant with this ID: ${restaurantInput.restaurantId}`,
+      };
+    }
+  }
+
+  async searchRestaurantByName(
+    searchRestaurantInput: SearchRestaurantInput,
+  ): Promise<SearchRestaurantOutput> {
+    try {
+      const [restaurants, totalResults] = await this.restaurants.findAndCount({
+        where: {
+          name: Raw(
+            (name) => `${name} ILIKE '%${searchRestaurantInput.query}%'`,
+          ),
+        },
+        take: 25,
+        skip: (searchRestaurantInput.page - 1) * 25,
+      });
+      return {
+        ok: true,
+        restaurants,
+        totalItems: totalResults,
+        totalPages: Math.ceil(totalResults / 25),
       };
     } catch (error) {
       return {

@@ -280,3 +280,9 @@
 - #76 Pagination for get restaurants by category
 
 - #77 See all restaurants
+
+- #78 Search restaurants with TypeORM operation: Like()
+
+  > ILIKE를 직접 SQL문을 사용해서 구현할 수도 있다. Raw() 함수를 통해
+
+  > https://github.com/typeorm/typeorm/blob/master/docs/find-options.md#advanced-options
