@@ -294,3 +294,9 @@
 - #81 Create dish part 2
 
 - #82 Edit/Delete dish
+
+- #83 Order entity
+
+  > Many To Many relationship
+
+  > https://github.com/typeorm/typeorm/blob/master/docs/many-to-many-relations.md

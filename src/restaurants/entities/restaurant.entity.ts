@@ -7,6 +7,7 @@ import {
   Length,
 } from 'class-validator';
 import { CoreEntity } from 'src/common/entities/core.entity';
+import { Order } from 'src/orders/entities/order.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
   Column,
@@ -60,4 +61,8 @@ export class Restaurant extends CoreEntity {
     nullable: true,
   })
   menu: Dish[];
+
+  @Field((type) => [Order], { nullable: true })
+  @OneToMany((type) => Order, (order) => order.restaurant, { nullable: true })
+  orders: Order[];
 }
