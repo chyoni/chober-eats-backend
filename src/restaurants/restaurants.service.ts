@@ -27,6 +27,8 @@ import {
 } from './dtos/search-restaurant.dto';
 import { CreateDishInput, CreateDishOutput } from './dtos/create-dish.dto';
 import { Dish } from './entities/dish.entity';
+import { EditDishInput, EditDishOutput } from './dtos/edit-dish.dto';
+import { DeleteDishInput, DeleteDishOutput } from './dtos/delete-dish.dto';
 
 @Injectable()
 export class RestaurantService {
@@ -283,6 +285,77 @@ export class RestaurantService {
       }
       const dish = this.dishes.create({ ...createDishInput, restaurant });
       await this.dishes.save(dish);
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error,
+      };
+    }
+  }
+
+  async editDish(
+    owner: User,
+    editDishInput: EditDishInput,
+  ): Promise<EditDishOutput> {
+    try {
+      const dish = await this.dishes.findOne(
+        { id: editDishInput.dishId },
+        { relations: ['restaurant'] },
+      );
+      if (!dish) {
+        return {
+          ok: false,
+          error: 'Dish not found.',
+        };
+      }
+      if (dish.restaurant.ownerId !== owner.id) {
+        return {
+          ok: false,
+          error: "You could not edit if not your's dish.",
+        };
+      }
+      await this.dishes.save([
+        {
+          id: editDishInput.dishId,
+          ...editDishInput,
+        },
+      ]);
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error,
+      };
+    }
+  }
+
+  async deleteDish(
+    owner: User,
+    deleteDishInput: DeleteDishInput,
+  ): Promise<DeleteDishOutput> {
+    try {
+      const dish = await this.dishes.findOne(
+        { id: deleteDishInput.dishId },
+        { relations: ['restaurant'] },
+      );
+      if (!dish) {
+        return {
+          ok: false,
+          error: 'Dish not found.',
+        };
+      }
+      if (dish.restaurant.ownerId !== owner.id) {
+        return {
+          ok: false,
+          error: "You could not delete if not your's dish.",
+        };
+      }
+      await this.dishes.delete(deleteDishInput.dishId);
       return {
         ok: true,
       };

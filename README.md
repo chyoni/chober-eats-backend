@@ -292,3 +292,5 @@
 - #80 Create dish part 1
 
 - #81 Create dish part 2
+
+- #82 Edit/Delete dish
