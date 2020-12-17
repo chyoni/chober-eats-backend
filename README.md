@@ -302,3 +302,5 @@
   > https://github.com/typeorm/typeorm/blob/master/docs/many-to-many-relations.md
 
 - #84 Create order mutation 1
+
+- #85 Create order mutation 2
