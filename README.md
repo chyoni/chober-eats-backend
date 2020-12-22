@@ -322,3 +322,5 @@
   ```bash
   npm i graphql-subscriptions
   ```
+
+- #93 Subscriptions 2
