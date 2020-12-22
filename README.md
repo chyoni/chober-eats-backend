@@ -314,3 +314,5 @@
 - #89 GetOrders query 1
 
 - #90 GetOrder query 1
+
+- #91 EditOrder mutation 1
