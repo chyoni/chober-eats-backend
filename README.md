@@ -316,3 +316,9 @@
 - #90 GetOrder query 1
 
 - #91 EditOrder mutation 1
+
+- #92 Subscriptions
+
+  ```bash
+  npm i graphql-subscriptions
+  ```
