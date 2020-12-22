@@ -324,3 +324,7 @@
   ```
 
 - #93 Subscriptions 2
+
+- #94 Subscriptions 3
+
+  > how to implement authenticate user that satisfies both Http and Web Socket
