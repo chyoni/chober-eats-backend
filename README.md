@@ -312,3 +312,5 @@
 - #88 Create order mutation 5
 
 - #89 GetOrders query 1
+
+- #90 GetOrder query 1
