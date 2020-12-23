@@ -334,3 +334,5 @@
 - #96 Subscription Filter
 
 - #97 Subscription resolve
+
+- #98 Pending order subscription

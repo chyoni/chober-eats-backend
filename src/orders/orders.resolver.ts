@@ -4,7 +4,7 @@ import { PubSub } from 'graphql-subscriptions';
 import { AuthUser } from 'src/auth/auth-user.decorator';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Role } from 'src/auth/role.decorator';
-import { PUB_SUB } from 'src/common/common.constants';
+import { NEW_PENDING_ORDER, PUB_SUB } from 'src/common/common.constants';
 import { User } from 'src/users/entities/user.entity';
 import { CreateOrderInput, CreateOrderOutput } from './dtos/create-order.dto';
 import { EditOrderInput, EditOrderOutput } from './dtos/edit-order.dto';
@@ -62,17 +62,14 @@ export class OrderResolver {
     return true;
   }
 
-  //filter는 이 Subscription이 실행되어야 하는 어떤 조건을 필터링할 때 사용
-  //resolve는 filter가 payload의 값을 한정 시키기 때문에 (예를 들면, 넘기는 id값만 주는 경우)
-  //받는 response를 변형시켜주는 역할
-  @Subscription((returns) => String, {
-    filter: ({ readyPotato }, { id }) => {
-      return readyPotato === id;
+  @Subscription((returns) => Order, {
+    filter: (payload, _, context) => {
+      console.log(payload);
+      return true;
     },
-    resolve: ({ readyPotato }) => `Your Potato is ${readyPotato} ready!`,
   })
-  @Role(['Any'])
-  readyPotato(@Args('id') id: number) {
-    return this.pubSub.asyncIterator('hotPotatos');
+  @Role(['Owner'])
+  pendingOrders() {
+    return this.pubSub.asyncIterator(NEW_PENDING_ORDER);
   }
 }
