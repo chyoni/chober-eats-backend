@@ -340,3 +340,7 @@
 - #99 Pending order subscription 2
 
 - #100 Cooked order subscription (for Delivery)
+
+- #101 Cooked order subscription 2 (for Delivery)
+
+  > new concept: eager relationship

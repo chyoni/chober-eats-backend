@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PubSub } from 'graphql-subscriptions';
 import {
   NEW_COOKED_ORDER,
+  NEW_ORDER_UPDATE,
   NEW_PENDING_ORDER,
   PUB_SUB,
 } from 'src/common/common.constants';
@@ -203,9 +204,7 @@ export class OrderService {
     { id, status }: EditOrderInput,
   ): Promise<EditOrderOutput> {
     try {
-      const order = await this.orders.findOne(id, {
-        relations: ['restaurant'],
-      });
+      const order = await this.orders.findOne(id);
       if (!order) {
         return {
           ok: false,
@@ -253,6 +252,9 @@ export class OrderService {
           });
         }
       }
+      await this.pubSub.publish(NEW_ORDER_UPDATE, {
+        orderUpdates: { ...order, status },
+      });
       return {
         ok: true,
       };
