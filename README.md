@@ -330,3 +330,5 @@
   > how to implement authenticate user that satisfies both Http and Web Socket
 
 - #95 PUB_SUB
+
+- #96 Subscription Filter
