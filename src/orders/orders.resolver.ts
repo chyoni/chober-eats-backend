@@ -62,10 +62,14 @@ export class OrderResolver {
     return true;
   }
 
+  //filter는 이 Subscription이 실행되어야 하는 어떤 조건을 필터링할 때 사용
+  //resolve는 filter가 payload의 값을 한정 시키기 때문에 (예를 들면, 넘기는 id값만 주는 경우)
+  //받는 response를 변형시켜주는 역할
   @Subscription((returns) => String, {
     filter: ({ readyPotato }, { id }) => {
       return readyPotato === id;
     },
+    resolve: ({ readyPotato }) => `Your Potato is ${readyPotato} ready!`,
   })
   @Role(['Any'])
   readyPotato(@Args('id') id: number) {
