@@ -344,3 +344,5 @@
 - #101 Cooked order subscription 2 (for Delivery)
 
   > new concept: eager relationship
+
+- #102 Take order subscription (for Delivery)
