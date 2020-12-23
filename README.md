@@ -336,3 +336,5 @@
 - #97 Subscription resolve
 
 - #98 Pending order subscription
+
+- #99 Pending order subscription 2
