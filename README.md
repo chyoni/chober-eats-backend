@@ -348,3 +348,5 @@
 - #102 Take order subscription (for Delivery)
 
 - #103 Payment
+
+- #104 Create payment 1
