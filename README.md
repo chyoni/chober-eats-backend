@@ -364,3 +364,5 @@
   > new concept: Cron pattern
 
   > https://docs.nestjs.com/techniques/task-scheduling
+
+- #108 Promoting restaurants

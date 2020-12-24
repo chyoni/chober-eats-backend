@@ -38,6 +38,11 @@ export class PaymentService {
           error: 'You are not allowed to do this.',
         };
       }
+      restaurant.isPromoted = true;
+      const date = new Date();
+      date.setDate(date.getDate() + 7);
+      restaurant.promotedUntil = date;
+      await this.restaurants.save(restaurant);
       await this.payments.save(
         this.payments.create({
           transactionId,
@@ -69,27 +74,5 @@ export class PaymentService {
         error,
       };
     }
-  }
-
-  //Cron 은 pattern으로 정해진 시간을 규칙적으로 실행하는 아이
-  @Cron('30 * * * * *', {
-    name: 'myJob',
-  })
-  async checkForPayments() {
-    console.log('Checking for payments...(cron)');
-    const job = this.schedulerRegistry.getCronJob('myJob');
-    console.log(job);
-  }
-
-  //Interval은 매 5초마다 실행되는 아이
-  @Interval(5000)
-  async checkForPayments2() {
-    console.log('Checking for payments...(interval)');
-  }
-
-  //Timeout은 앱이 실행 후 2초가 지나면 딱 1번 실행되는 아이
-  @Timeout(2000)
-  async checkForPayments3() {
-    console.log('Checking for payments...(timeout)');
   }
 }
