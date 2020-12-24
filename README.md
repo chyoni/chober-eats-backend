@@ -366,3 +366,5 @@
   > https://docs.nestjs.com/techniques/task-scheduling
 
 - #108 Promoting restaurants
+
+- #109 Promoting restaurants 2 (check setting promote date)

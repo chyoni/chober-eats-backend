@@ -3,7 +3,7 @@ import { Cron, Interval, SchedulerRegistry, Timeout } from '@nestjs/schedule';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
 import { User } from 'src/users/entities/user.entity';
-import { Repository } from 'typeorm';
+import { LessThan, Repository } from 'typeorm';
 import {
   CreatePaymentInput,
   CreatePaymentOutput,
@@ -74,5 +74,30 @@ export class PaymentService {
         error,
       };
     }
+  }
+
+  @Cron('0 0 24 * * 1-7')
+  async checkPromotedRestaurants() {
+    //첫 번째 방법
+    const restaurants = await this.restaurants.find({ isPromoted: true });
+    restaurants.forEach(async (restaurant) => {
+      if (restaurant.promotedUntil < new Date()) {
+        restaurant.isPromoted = false;
+        restaurant.promotedUntil = null;
+        await this.restaurants.save(restaurant);
+      }
+    });
+    /* 두 번째 방법
+    const restaurants = await this.restaurants.find({
+      isPromoted: true,
+      promotedUntil: LessThan(new Date()),
+    });
+    console.log(restaurants);
+    restaurants.forEach(async (restaurant) => {
+      restaurant.isPromoted = false;
+      restaurant.promotedUntil = null;
+      await this.restaurants.save(restaurant);
+    });
+    */
   }
 }
