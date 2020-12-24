@@ -352,3 +352,5 @@
 - #104 Create payment 1
 
 - #105 Create payment 2
+
+- #106 Get payments
