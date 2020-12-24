@@ -354,3 +354,13 @@
 - #105 Create payment 2
 
 - #106 Get payments
+
+- #107 Task schedule
+
+  ```bash
+  npm install --save @nestjs/schedule
+  ```
+
+  > new concept: Cron pattern
+
+  > https://docs.nestjs.com/techniques/task-scheduling
