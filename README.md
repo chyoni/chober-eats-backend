@@ -346,3 +346,5 @@
   > new concept: eager relationship
 
 - #102 Take order subscription (for Delivery)
+
+- #103 Payment
