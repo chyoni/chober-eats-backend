@@ -370,3 +370,9 @@
 - #109 Promoting restaurants 2 (check setting promote date)
 
 - #110 Query update
+
+- #111 File upload 1
+
+  ```bash
+  nest g mo uploads
+  ```
