@@ -376,3 +376,11 @@
   ```bash
   nest g mo uploads
   ```
+
+- #112 File upload 2
+
+  > 서버에 올린 파일을 AWS에 URL 형식으로 저장
+
+  ```bash
+  npm install aws-sdk
+  ```
