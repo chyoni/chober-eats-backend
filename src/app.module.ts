@@ -52,7 +52,7 @@ import { ScheduleModule } from '@nestjs/schedule';
       autoSchemaFile: true,
       context: ({ req, connection }) => {
         return {
-          token: req ? req.headers['x-jwt'] : connection.context['X-JWT'],
+          token: req ? req.headers['x-jwt'] : connection.context['x-jwt'],
         };
       },
     }),

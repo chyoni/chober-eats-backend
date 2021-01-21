@@ -368,3 +368,5 @@
 - #108 Promoting restaurants
 
 - #109 Promoting restaurants 2 (check setting promote date)
+
+- #110 Query update
