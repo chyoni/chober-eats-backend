@@ -8,6 +8,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   // app.use()는 function만 호출 가능
   //app.use(JwtMiddleware);
+  app.enableCors();
   await app.listen(4000);
 }
 bootstrap();
